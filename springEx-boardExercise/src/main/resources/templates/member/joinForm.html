@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Join Form</title>
+<link rel="stylesheet" href="/css/default.css">
+<script>
+	function formCheck() {
+		return true;
+	}
+</script>
+</head>
+<body>
+	<div id="container">
+		<h1 class="center">[회원가입 폼]</h1>
+			<form th:action="@{/member/join}" th:object="${createMemberForm}" th:method="post" th:onsubmit="formCheck()">
+			<table>
+				<tr>
+					<th>아이디</th>
+					<td>
+						<input type="text" th:field="*{id}">
+					</td>
+				</tr>
+				<tr>
+					<th>패스워드</th>
+					<td>
+						<input type="password" th:field="*{password}">
+					</td>
+				</tr>
+				<tr>
+					<th>이름</th>
+					<td>
+						<input type="text" th:field="*{name}">
+					</td>
+				</tr>
+				<tr>
+					<th>성별</th>
+					<td>
+						<th:block th:each="gender : ${T(com.example.boardExercise.model.member.GenderType).values()}">
+							[[${gender.description}]]<input type="radio" th:field="*{gender}" th:value="${gender}">
+						</th:block>
+					</td>
+				</tr>
+				<tr>
+					<th>생년월일</th>
+					<td>
+						<input type="date" th:field="*{birth}">
+					</td>
+				</tr>
+				<tr>
+					<th>이메일</th>
+					<td>
+						<input type="email" th:field="*{email}">
+					</td>
+				</tr>
+			</table>
+			<p class="center">
+				<input type="submit" value="가입하기">
+				<input type="button" value="취소" th:onclick="|location.href='/'|">
+			</p>
+		</form>
+	</div>
+</body>
+</html>
